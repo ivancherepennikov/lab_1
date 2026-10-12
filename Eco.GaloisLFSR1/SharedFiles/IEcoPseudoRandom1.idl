@@ -1,0 +1,16 @@
+import "IEcoBase1.idl";
+
+/*
+ * Stateful (object-oriented) pseudo random number generator.
+ * The object encapsulates the register state; the client only calls Next.
+ * See IEcoPseudoRandom1.h for the contract.
+ */
+[
+    uuid(36BD4863-DE93-40D6-B1FB-319B64A37722)
+]
+interface IEcoPseudoRandom1 : IEcoUnknown {
+
+    int16_t Init([in] uint64_t seed, [in] uint64_t param, [in] uint16_t bits);
+    int16_t Next([out] uint64_t* value);
+    char_t* get_Name();
+};

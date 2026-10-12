@@ -1,0 +1,10 @@
+# build caches and tooling (the compiled component libraries in BuildFiles/ ARE kept: the assignment asks for the build)
+.dd/
+.dd_client/
+.dd*/
+.build_*.log
+node_modules/
+__pycache__/
+.DS_Store
+xcuserdata/
+*.xcuserstate

@@ -1,0 +1,485 @@
+{
+ "rows": [
+  {
+   "algo": "Fibonacci LFSR",
+   "bits": 32,
+   "seed": "1",
+   "mask": "0",
+   "ref": [
+    "00000003",
+    "00000006",
+    "0000000D",
+    "0000001B",
+    "00000036"
+   ],
+   "soa": [
+    "00000003",
+    "00000006",
+    "0000000D",
+    "0000001B",
+    "00000036"
+   ],
+   "ooa": [
+    "00000003",
+    "00000006",
+    "0000000D",
+    "0000001B",
+    "00000036"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Fibonacci LFSR",
+   "bits": 32,
+   "seed": "ACE1",
+   "mask": "B400",
+   "ref": [
+    "000059C3",
+    "0000B387",
+    "0000670F",
+    "0000CE1E",
+    "00009C3C"
+   ],
+   "soa": [
+    "000059C3",
+    "0000B387",
+    "0000670F",
+    "0000CE1E",
+    "00009C3C"
+   ],
+   "ooa": [
+    "000059C3",
+    "0000B387",
+    "0000670F",
+    "0000CE1E",
+    "00009C3C"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Fibonacci LFSR",
+   "bits": 32,
+   "seed": "DEADBEEF",
+   "mask": "0",
+   "ref": [
+    "BD5B7DDE",
+    "7AB6FBBC",
+    "F56DF779",
+    "EADBEEF3",
+    "D5B7DDE7"
+   ],
+   "soa": [
+    "BD5B7DDE",
+    "7AB6FBBC",
+    "F56DF779",
+    "EADBEEF3",
+    "D5B7DDE7"
+   ],
+   "ooa": [
+    "BD5B7DDE",
+    "7AB6FBBC",
+    "F56DF779",
+    "EADBEEF3",
+    "D5B7DDE7"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Fibonacci LFSR",
+   "bits": 64,
+   "seed": "1",
+   "mask": "0",
+   "ref": [
+    "0000000000000002",
+    "0000000000000004",
+    "0000000000000008",
+    "0000000000000010",
+    "0000000000000020"
+   ],
+   "soa": [
+    "0000000000000002",
+    "0000000000000004",
+    "0000000000000008",
+    "0000000000000010",
+    "0000000000000020"
+   ],
+   "ooa": [
+    "0000000000000002",
+    "0000000000000004",
+    "0000000000000008",
+    "0000000000000010",
+    "0000000000000020"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Fibonacci LFSR",
+   "bits": 64,
+   "seed": "DEADBEEFCAFEBABE",
+   "mask": "0",
+   "ref": [
+    "BD5B7DDF95FD757C",
+    "7AB6FBBF2BFAEAF9",
+    "F56DF77E57F5D5F3",
+    "EADBEEFCAFEBABE7",
+    "D5B7DDF95FD757CF"
+   ],
+   "soa": [
+    "BD5B7DDF95FD757C",
+    "7AB6FBBF2BFAEAF9",
+    "F56DF77E57F5D5F3",
+    "EADBEEFCAFEBABE7",
+    "D5B7DDF95FD757CF"
+   ],
+   "ooa": [
+    "BD5B7DDF95FD757C",
+    "7AB6FBBF2BFAEAF9",
+    "F56DF77E57F5D5F3",
+    "EADBEEFCAFEBABE7",
+    "D5B7DDF95FD757CF"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Galois LFSR",
+   "bits": 32,
+   "seed": "1",
+   "mask": "0",
+   "ref": [
+    "80200003",
+    "C0300002",
+    "60180001",
+    "B02C0003",
+    "D8360002"
+   ],
+   "soa": [
+    "80200003",
+    "C0300002",
+    "60180001",
+    "B02C0003",
+    "D8360002"
+   ],
+   "ooa": [
+    "80200003",
+    "C0300002",
+    "60180001",
+    "B02C0003",
+    "D8360002"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Galois LFSR",
+   "bits": 32,
+   "seed": "ACE1",
+   "mask": "B400",
+   "ref": [
+    "0000E270",
+    "00007138",
+    "0000389C",
+    "00001C4E",
+    "00000E27"
+   ],
+   "soa": [
+    "0000E270",
+    "00007138",
+    "0000389C",
+    "00001C4E",
+    "00000E27"
+   ],
+   "ooa": [
+    "0000E270",
+    "00007138",
+    "0000389C",
+    "00001C4E",
+    "00000E27"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Galois LFSR",
+   "bits": 32,
+   "seed": "DEADBEEF",
+   "mask": "0",
+   "ref": [
+    "EF76DF74",
+    "77BB6FBA",
+    "3BDDB7DD",
+    "9DCEDBED",
+    "CEC76DF5"
+   ],
+   "soa": [
+    "EF76DF74",
+    "77BB6FBA",
+    "3BDDB7DD",
+    "9DCEDBED",
+    "CEC76DF5"
+   ],
+   "ooa": [
+    "EF76DF74",
+    "77BB6FBA",
+    "3BDDB7DD",
+    "9DCEDBED",
+    "CEC76DF5"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Galois LFSR",
+   "bits": 64,
+   "seed": "1",
+   "mask": "0",
+   "ref": [
+    "D800000000000000",
+    "6C00000000000000",
+    "3600000000000000",
+    "1B00000000000000",
+    "0D80000000000000"
+   ],
+   "soa": [
+    "D800000000000000",
+    "6C00000000000000",
+    "3600000000000000",
+    "1B00000000000000",
+    "0D80000000000000"
+   ],
+   "ooa": [
+    "D800000000000000",
+    "6C00000000000000",
+    "3600000000000000",
+    "1B00000000000000",
+    "0D80000000000000"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Galois LFSR",
+   "bits": 64,
+   "seed": "DEADBEEFCAFEBABE",
+   "mask": "0",
+   "ref": [
+    "6F56DF77E57F5D5F",
+    "EFAB6FBBF2BFAEAF",
+    "AFD5B7DDF95FD757",
+    "8FEADBEEFCAFEBAB",
+    "9FF56DF77E57F5D5"
+   ],
+   "soa": [
+    "6F56DF77E57F5D5F",
+    "EFAB6FBBF2BFAEAF",
+    "AFD5B7DDF95FD757",
+    "8FEADBEEFCAFEBAB",
+    "9FF56DF77E57F5D5"
+   ],
+   "ooa": [
+    "6F56DF77E57F5D5F",
+    "EFAB6FBBF2BFAEAF",
+    "AFD5B7DDF95FD757",
+    "8FEADBEEFCAFEBAB",
+    "9FF56DF77E57F5D5"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Xorshift",
+   "bits": 32,
+   "seed": "1",
+   "mask": "0",
+   "ref": [
+    "00042021",
+    "04080601",
+    "9DCCA8C5",
+    "1255994F",
+    "8EF917D1"
+   ],
+   "soa": [
+    "00042021",
+    "04080601",
+    "9DCCA8C5",
+    "1255994F",
+    "8EF917D1"
+   ],
+   "ooa": [
+    "00042021",
+    "04080601",
+    "9DCCA8C5",
+    "1255994F",
+    "8EF917D1"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Xorshift",
+   "bits": 32,
+   "seed": "DEADBEEF",
+   "mask": "0",
+   "ref": [
+    "477D20B7",
+    "8E1D9142",
+    "BA8C2458",
+    "FEE0503B",
+    "680E0348"
+   ],
+   "soa": [
+    "477D20B7",
+    "8E1D9142",
+    "BA8C2458",
+    "FEE0503B",
+    "680E0348"
+   ],
+   "ooa": [
+    "477D20B7",
+    "8E1D9142",
+    "BA8C2458",
+    "FEE0503B",
+    "680E0348"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Xorshift",
+   "bits": 64,
+   "seed": "1",
+   "mask": "0",
+   "ref": [
+    "0000000040822041",
+    "100041060C011441",
+    "9B1E842F6E862629",
+    "F554F503555D8025",
+    "860C1FB090599265"
+   ],
+   "soa": [
+    "0000000040822041",
+    "100041060C011441",
+    "9B1E842F6E862629",
+    "F554F503555D8025",
+    "860C1FB090599265"
+   ],
+   "ooa": [
+    "0000000040822041",
+    "100041060C011441",
+    "9B1E842F6E862629",
+    "F554F503555D8025",
+    "860C1FB090599265"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  },
+  {
+   "algo": "Xorshift",
+   "bits": 64,
+   "seed": "DEADBEEFCAFEBABE",
+   "mask": "0",
+   "ref": [
+    "27DC5C1B2D04284B",
+    "A29639727AEB52DB",
+    "68F59BE1EBED52BE",
+    "B19C47A2B60FE79B",
+    "BB99D99371417E94"
+   ],
+   "soa": [
+    "27DC5C1B2D04284B",
+    "A29639727AEB52DB",
+    "68F59BE1EBED52BE",
+    "B19C47A2B60FE79B",
+    "BB99D99371417E94"
+   ],
+   "ooa": [
+    "27DC5C1B2D04284B",
+    "A29639727AEB52DB",
+    "68F59BE1EBED52BE",
+    "B19C47A2B60FE79B",
+    "BB99D99371417E94"
+   ],
+   "soa_ok": true,
+   "ooa_ok": true,
+   "same": true
+  }
+ ],
+ "stats": [
+  {
+   "algo": "Fibonacci LFSR",
+   "bits": 32,
+   "ones": 0.49977,
+   "low": 0.49978,
+   "chi2": 833.6,
+   "ooa": 66.83,
+   "soa": 77.85
+  },
+  {
+   "algo": "Fibonacci LFSR",
+   "bits": 64,
+   "ones": 0.49987,
+   "low": 0.49988,
+   "chi2": 1727.7,
+   "ooa": 40.07,
+   "soa": 43.28
+  },
+  {
+   "algo": "Galois LFSR",
+   "bits": 32,
+   "ones": 0.50034,
+   "low": 0.50006,
+   "chi2": 384.7,
+   "ooa": 72.86,
+   "soa": 81.25
+  },
+  {
+   "algo": "Galois LFSR",
+   "bits": 64,
+   "ones": 0.49946,
+   "low": 0.49943,
+   "chi2": 1545.0,
+   "ooa": 41.31,
+   "soa": 43.69
+  },
+  {
+   "algo": "Xorshift",
+   "bits": 32,
+   "ones": 0.50005,
+   "low": 0.50015,
+   "chi2": 315.8,
+   "ooa": 139.47,
+   "soa": 264.9
+  },
+  {
+   "algo": "Xorshift",
+   "bits": 64,
+   "ones": 0.50001,
+   "low": 0.49985,
+   "chi2": 234.3,
+   "ooa": 141.54,
+   "soa": 277.32
+  }
+ ],
+ "sizes": {
+  "CEcoFibonacciLFSR1_919D0053": 96,
+  "CEcoGaloisLFSR1_66391FF5": 96,
+  "CEcoXorshift1_479BCC71": 88
+ }
+}

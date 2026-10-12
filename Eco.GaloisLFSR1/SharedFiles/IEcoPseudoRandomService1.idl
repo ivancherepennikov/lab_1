@@ -1,0 +1,15 @@
+import "IEcoBase1.idl";
+
+/*
+ * Stateless (service-oriented) pseudo random number generator.
+ * The component keeps no state: the caller passes the current register state
+ * and receives the next one. See IEcoPseudoRandomService1.h for the contract.
+ */
+[
+    uuid(C13EFEC0-379D-4374-9B7F-F4E3815D6C31)
+]
+interface IEcoPseudoRandomService1 : IEcoUnknown {
+
+    int16_t Step32([in] uint32_t state, [in] uint32_t param, [out] uint32_t* newState);
+    int16_t Step64([in] uint64_t state, [in] uint64_t param, [out] uint64_t* newState);
+};
