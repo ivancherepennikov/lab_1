@@ -47,6 +47,26 @@ for l in out.splitlines():
         stats.append(dict(algo=m.group(1).strip(), bits=int(m.group(2)), ones=float(m.group(3)), low=float(m.group(4)),
                           chi2=float(m.group(5)), ooa=float(m.group(6)), soa=float(m.group(7))))
 
+# comparison with the C standard library generators (client menu item 8) and Mersenne Twister (MATLAB rand / Python random)
+out8 = subprocess.run([CLIENT], input="8\n0\n", capture_output=True, text=True, timeout=180).stdout
+cmp_rows = []
+for l in out8.splitlines():
+    m = re.search(r"(?:^|> )(.+?)\s+ones24 ([\d.]+)\s+chi2\(byte0\)\s+([\d.]+)\s+chi2\(byte1\)\s+([\d.]+)\s+([\d.]+) Mvalues/s", l)
+    if m:
+        cmp_rows.append(dict(name=m.group(1).strip(), ones=float(m.group(2)), chi0=float(m.group(3)), chi1=float(m.group(4)), speed=float(m.group(5))))
+import random as _random
+_rng = _random.Random(0x2545F491)
+_N = 1000000
+_ones, _b0, _b1 = 0, [0] * 256, [0] * 256
+for _ in range(_N):
+    v = _rng.getrandbits(32)
+    _ones += bin(v & 0xFFFFFF).count("1")
+    _b0[v & 0xFF] += 1
+    _b1[(v >> 8) & 0xFF] += 1
+_exp = _N / 256.0
+_chi = lambda b: sum((x - _exp) ** 2 / _exp for x in b)
+cmp_rows.append(dict(name="Mersenne Twister (MATLAB rand, Python random)", ones=_ones / (_N * 24.0), chi0=_chi(_b0), chi1=_chi(_b1), speed=None))
+
 # object sizes
 sizes = {}
 fw = os.environ.get("ECO_FRAMEWORK") or HOME + "/Dev/Eco.Framework"
@@ -70,8 +90,8 @@ for proj, name in ((p_, cls(p_)) for p_ in ("Eco.FibonacciLFSR1", "Eco.GaloisLFS
     subprocess.check_call(cmd)
     sizes[name] = int(subprocess.check_output([tmp[:-2]], text=True).strip())
 
-json.dump(dict(rows=rows, stats=stats, sizes=sizes), open("data.json", "w"), indent=1)
+json.dump(dict(rows=rows, stats=stats, cmp=cmp_rows, sizes=sizes), open("data.json", "w"), indent=1)
 print(json.dumps(sizes))
-print("rows:", len(rows), " stats:", len(stats))
+print("rows:", len(rows), " stats:", len(stats), " cmp:", len(cmp_rows))
 bad = [r for r in rows if not (r["soa_ok"] and r["ooa_ok"] and r["same"])]
 print("mismatches vs reference:", len(bad))

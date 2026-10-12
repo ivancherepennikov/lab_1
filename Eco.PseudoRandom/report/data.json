@@ -428,8 +428,8 @@
    "ones": 0.49977,
    "low": 0.49978,
    "chi2": 833.6,
-   "ooa": 66.83,
-   "soa": 77.85
+   "ooa": 65.62,
+   "soa": 76.86
   },
   {
    "algo": "Fibonacci LFSR",
@@ -437,8 +437,8 @@
    "ones": 0.49987,
    "low": 0.49988,
    "chi2": 1727.7,
-   "ooa": 40.07,
-   "soa": 43.28
+   "ooa": 39.77,
+   "soa": 43.49
   },
   {
    "algo": "Galois LFSR",
@@ -446,8 +446,8 @@
    "ones": 0.50034,
    "low": 0.50006,
    "chi2": 384.7,
-   "ooa": 72.86,
-   "soa": 81.25
+   "ooa": 73.62,
+   "soa": 81.71
   },
   {
    "algo": "Galois LFSR",
@@ -455,8 +455,8 @@
    "ones": 0.49946,
    "low": 0.49943,
    "chi2": 1545.0,
-   "ooa": 41.31,
-   "soa": 43.69
+   "ooa": 41.25,
+   "soa": 42.87
   },
   {
    "algo": "Xorshift",
@@ -464,8 +464,8 @@
    "ones": 0.50005,
    "low": 0.50015,
    "chi2": 315.8,
-   "ooa": 139.47,
-   "soa": 264.9
+   "ooa": 139.45,
+   "soa": 271.0
   },
   {
    "algo": "Xorshift",
@@ -473,8 +473,59 @@
    "ones": 0.50001,
    "low": 0.49985,
    "chi2": 234.3,
-   "ooa": 141.54,
-   "soa": 277.32
+   "ooa": 136.35,
+   "soa": 268.67
+  }
+ ],
+ "cmp": [
+  {
+   "name": "Fibonacci LFSR",
+   "ones": 0.49977,
+   "chi0": 208.3,
+   "chi1": 208.3,
+   "speed": 65.41
+  },
+  {
+   "name": "Galois LFSR",
+   "ones": 0.50043,
+   "chi0": 300.2,
+   "chi1": 296.2,
+   "speed": 72.66
+  },
+  {
+   "name": "Xorshift",
+   "ones": 0.50009,
+   "chi0": 242.4,
+   "chi1": 258.9,
+   "speed": 138.85
+  },
+  {
+   "name": "libc rand()",
+   "ones": 0.49999,
+   "chi0": 263.6,
+   "chi1": 233.2,
+   "speed": 140.49
+  },
+  {
+   "name": "libc random()",
+   "ones": 0.50017,
+   "chi0": 227.8,
+   "chi1": 213.4,
+   "speed": 321.13
+  },
+  {
+   "name": "libc lrand48()",
+   "ones": 0.49984,
+   "chi0": 252.0,
+   "chi1": 261.8,
+   "speed": 361.53
+  },
+  {
+   "name": "Mersenne Twister (MATLAB rand, Python random)",
+   "ones": 0.5000515416666667,
+   "chi0": 244.9858559999999,
+   "chi1": 253.9233280000002,
+   "speed": null
   }
  ],
  "sizes": {

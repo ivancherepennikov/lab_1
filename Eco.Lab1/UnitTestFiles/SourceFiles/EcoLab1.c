@@ -24,6 +24,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include "IEcoSystem1.h"
 #include "IdEcoInterfaceBus1.h"
@@ -335,6 +336,138 @@ static void Statistics(IEcoInterfaceBus1* pIBus) {
     printf("\n");
 }
 
+#define CMP_COUNT 1000000UL
+
+/* Quality figures over the low 24 bits of a value: share of ones and byte uniformity of bytes 0 and 1. */
+typedef struct CmpAcc {
+    unsigned long ones;
+    unsigned long b0[256];
+    unsigned long b1[256];
+} CmpAcc;
+
+static void CmpAccAdd(CmpAcc* acc, uint32_t v) {
+    acc->ones += PopCount32(v & 0xFFFFFFUL);
+    acc->b0[v & 0xFF]++;
+    acc->b1[(v >> 8) & 0xFF]++;
+}
+
+static double CmpChi2(const unsigned long* bins) {
+    double expected = (double)CMP_COUNT / 256.0;
+    double chi = 0.0;
+    double diff = 0.0;
+    unsigned int k = 0;
+
+    for (k = 0; k < 256; k++) {
+        diff = (double)bins[k] - expected;
+        chi += diff * diff / expected;
+    }
+    return chi;
+}
+
+static void CmpPrint(const char* name, const CmpAcc* acc, double seconds) {
+    printf("%-26s ones24 %.5f  chi2(byte0) %7.1f  chi2(byte1) %7.1f  %7.2f Mvalues/s\n", name,
+           (double)acc->ones / ((double)CMP_COUNT * 24.0), CmpChi2(acc->b0), CmpChi2(acc->b1),
+           seconds > 0.0 ? (double)CMP_COUNT / seconds / 1000000.0 : 0.0);
+}
+
+/* libc generators: kind 0 = rand, 1 = random, 2 = lrand48 (all return 31 bit values). */
+static unsigned long CmpLibcNext(int kind) {
+    if (kind == 0) {
+        return (unsigned long)rand();
+    }
+    if (kind == 1) {
+        return (unsigned long)random();
+    }
+    return (unsigned long)lrand48();
+}
+
+static void CmpLibc(const char* name, int kind) {
+    CmpAcc acc;
+    unsigned long i = 0;
+    unsigned long sink = 0;
+    unsigned int k = 0;
+    clock_t start = 0;
+    clock_t stop = 0;
+
+    acc.ones = 0;
+    for (k = 0; k < 256; k++) {
+        acc.b0[k] = 0;
+        acc.b1[k] = 0;
+    }
+    if (kind == 0) { srand(0x2545F491U); } else if (kind == 1) { srandom(0x2545F491U); } else { srand48(0x2545F491L); }
+    for (i = 0; i < CMP_COUNT; i++) {
+        CmpAccAdd(&acc, (uint32_t)CmpLibcNext(kind));
+    }
+    if (kind == 0) { srand(0x2545F491U); } else if (kind == 1) { srandom(0x2545F491U); } else { srand48(0x2545F491L); }
+    start = clock();
+    for (i = 0; i < CMP_COUNT; i++) {
+        sink += CmpLibcNext(kind);
+    }
+    stop = clock();
+    CmpPrint(name, &acc, (double)(stop - start) / (double)CLOCKS_PER_SEC);
+    if (sink == 1) {
+        printf(" ");
+    }
+}
+
+static void CmpOurs(IEcoInterfaceBus1* pIBus, uint16_t algo) {
+    CmpAcc acc;
+    IEcoPseudoRandom1* pObj = 0;
+    uint64_t value = 0;
+    unsigned long i = 0;
+    unsigned int k = 0;
+    clock_t start = 0;
+    clock_t stop = 0;
+    int16_t result = ERR_ECO_SUCCESS;
+    char title[40];
+
+    result = pIBus->pVTbl->QueryComponent(pIBus, g_Algos[algo].cid, 0, &IID_IEcoPseudoRandom1, (void**)&pObj);
+    if (result != ERR_ECO_SUCCESS || pObj == 0) {
+        return;
+    }
+    acc.ones = 0;
+    for (k = 0; k < 256; k++) {
+        acc.b0[k] = 0;
+        acc.b1[k] = 0;
+    }
+    result = pObj->pVTbl->Init(pObj, (uint64_t)0x2545F491UL, 0, 32);
+    for (i = 0; i < CMP_COUNT && result == ERR_ECO_SUCCESS; i++) {
+        result = pObj->pVTbl->Next(pObj, &value);
+        CmpAccAdd(&acc, (uint32_t)(value & 0xFFFFFFFFUL));
+    }
+    result = pObj->pVTbl->Init(pObj, (uint64_t)0x2545F491UL, 0, 32);
+    start = clock();
+    for (i = 0; i < CMP_COUNT && result == ERR_ECO_SUCCESS; i++) {
+        result = pObj->pVTbl->Next(pObj, &value);
+    }
+    stop = clock();
+    pObj->pVTbl->Release(pObj);
+    k = 0;
+    while (g_Algos[algo].name[k] != 0 && k < 28) {
+        title[k] = g_Algos[algo].name[k];
+        k++;
+    }
+    title[k] = 0;
+    if (result == ERR_ECO_SUCCESS) {
+        CmpPrint(title, &acc, (double)(stop - start) / (double)CLOCKS_PER_SEC);
+    }
+}
+
+/* Comparison with the C standard library generators on identical tests (low 24 bits, 1 000 000 values). */
+static void ComparisonWithLibc(IEcoInterfaceBus1* pIBus) {
+    uint16_t algo = 0;
+
+    printf("=== Comparison with libc generators: %lu values, seed 0x2545F491, low 24 bits ===\n", CMP_COUNT);
+    printf("ones24 = share of ones in the low 24 bits (ideal 0.5), chi2 per byte (ideal about 255)\n");
+    for (algo = 0; algo < ALGO_COUNT; algo++) {
+        CmpOurs(pIBus, algo);
+    }
+    CmpLibc("libc rand()", 0);
+    CmpLibc("libc random()", 1);
+    CmpLibc("libc lrand48()", 2);
+    printf("\n");
+}
+
 static void InteractiveMenu(IEcoInterfaceBus1* pIBus) {
     uint64_t values[64];
     char text[64];
@@ -347,9 +480,13 @@ static void InteractiveMenu(IEcoInterfaceBus1* pIBus) {
     int16_t result = ERR_ECO_SUCCESS;
 
     for (;;) {
-        printf("Algorithm: 1) Fibonacci LFSR  2) Galois LFSR  3) Xorshift  9) statistics  0) exit > ");
+        printf("Algorithm: 1) Fibonacci LFSR  2) Galois LFSR  3) Xorshift  8) comparison with libc  9) statistics  0) exit > ");
         if (scanf("%d", &algoChoice) != 1 || algoChoice == 0) {
             break;
+        }
+        if (algoChoice == 8) {
+            ComparisonWithLibc(pIBus);
+            continue;
         }
         if (algoChoice == 9) {
             Statistics(pIBus);
