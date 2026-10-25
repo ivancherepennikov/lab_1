@@ -83,7 +83,7 @@ c.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 },
 c.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 600 }, children: [new TextRun({ text: "Лабораторная работа № 2", font: FONT, size: 36, bold: true })] }));
 c.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 }, children: [new TextRun({ text: "Повторное использование компонентов АОМК: включение и агрегирование", font: FONT, size: 30, bold: true })] }));
 c.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 800 }, children: [new TextRun({ text: "Компоненты калькулятора A–E, внешние компоненты Eco.Lab1Outer и Eco.Lab2, генераторы лабораторной работы 1", font: FONT, size: 26 })] }));
-for (const l of ["Студент: ______________________________", "Группа: _______________________________", "Платформа: macOS (arm64), Xcode, Eco.Framework 20260918"]) {
+for (const l of ["Студент: Черепенников Иван", "Группа: ТИДИ24", "Платформа: macOS (arm64), Xcode, Eco.Framework 20260918"]) {
   c.push(new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 80 }, children: [new TextRun({ text: l, font: FONT, size: 24 })] }));
 }
 

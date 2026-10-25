@@ -117,8 +117,8 @@ c.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 },
 c.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 600 }, children: [new TextRun({ text: "Лабораторная работа № 1", font: FONT, size: 36, bold: true })] }));
 c.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 }, children: [new TextRun({ text: "Разработка компонентов по технологии АОМК (ACOM)", font: FONT, size: 30, bold: true })] }));
 c.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 800 }, children: [new TextRun({ text: "Раздел 3. Генераторы псевдослучайных чисел, задачи 38–40: LFSR в конфигурациях Фибоначчи и Галуа, Xorshift", font: FONT, size: 26 })] }));
-c.push(new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 80 }, children: [new TextRun({ text: "Студент: ______________________________", font: FONT, size: 24 })] }));
-c.push(new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 80 }, children: [new TextRun({ text: "Группа: _______________________________", font: FONT, size: 24 })] }));
+c.push(new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 80 }, children: [new TextRun({ text: "Студент: Черепенников Иван", font: FONT, size: 24 })] }));
+c.push(new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 80 }, children: [new TextRun({ text: "Группа: ТИДИ24", font: FONT, size: 24 })] }));
 c.push(new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 80 }, children: [new TextRun({ text: "Платформа: macOS (arm64), Xcode, Eco.Framework 20260918", font: FONT, size: 24 })] }));
 
 c.push(new Paragraph({ pageBreakBefore: true, children: [new TextRun({ text: "Содержание", font: FONT, size: 30, bold: true })], spacing: { after: 160 } }));
