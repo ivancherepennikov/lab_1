@@ -1,0 +1,11 @@
+import "IEcoBase1.idl";
+
+/* Calculator interface X (see IEcoCalculatorX.h for the contract) */
+[
+    uuid(93221116-2248-4742-AE06-82819447843D)
+]
+interface IEcoCalculatorX : IEcoUnknown {
+
+    int32_t Addition([in] int16_t a, [in] int16_t b);
+    int16_t Subtraction([in] int16_t a, [in] int16_t b);
+};

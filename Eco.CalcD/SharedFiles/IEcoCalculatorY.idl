@@ -1,0 +1,11 @@
+import "IEcoBase1.idl";
+
+/* Calculator interface Y (see IEcoCalculatorY.h for the contract) */
+[
+    uuid(BD6414C2-9096-423E-A90C-04D77AFD1CAD)
+]
+interface IEcoCalculatorY : IEcoUnknown {
+
+    int32_t Multiplication([in] int16_t a, [in] int16_t b);
+    int16_t Division([in] int16_t a, [in] int16_t b);
+};

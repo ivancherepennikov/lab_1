@@ -1,0 +1,89 @@
+{
+ "tests": {
+  "CalcA": {
+   "checks": 18,
+   "exit": 0
+  },
+  "CalcB": {
+   "checks": 24,
+   "exit": 0
+  },
+  "CalcC": {
+   "checks": 28,
+   "exit": 0
+  },
+  "CalcD": {
+   "checks": 15,
+   "exit": 0
+  },
+  "CalcE": {
+   "checks": 21,
+   "exit": 0
+  },
+  "Lab1Outer": {
+   "checks": 617,
+   "exit": 0
+  },
+  "Lab2": {
+   "checks": 719,
+   "exit": 0
+  }
+ },
+ "demo_lab1outer": [
+  "=== Eco.Lab1Outer: calculators X and Y requested with QueryInterface, every combination of the inner components ===",
+  "  X from A (containment)  Y from D (containment)   3+5=8  7-9=-2  (-32768)-1=-32768  |  6*7=42  17/5=3  1/0=0",
+  "  X from A (containment)  Y from E (aggregation)   3+5=8  7-9=-2  (-32768)-1=-32768  |  6*7=42  17/5=3  1/0=32767",
+  "  X from A (containment)  Y from C (containment)   3+5=8  7-9=-2  (-32768)-1=-32768  |  6*7=42  17/5=3  1/0=-1",
+  "  X from B (aggregation)  Y from D (containment)   3+5=8  7-9=-2  (-32768)-1=32767  |  6*7=42  17/5=3  1/0=0",
+  "  X from B (aggregation)  Y from E (aggregation)   3+5=8  7-9=-2  (-32768)-1=32767  |  6*7=42  17/5=3  1/0=32767",
+  "  X from B (aggregation)  Y from C (containment)   3+5=8  7-9=-2  (-32768)-1=32767  |  6*7=42  17/5=3  1/0=-1",
+  "  X from C (containment)  Y from D (containment)   3+5=8  7-9=-2  (-32768)-1=0  |  6*7=42  17/5=3  1/0=0",
+  "  X from C (containment)  Y from E (aggregation)   3+5=8  7-9=-2  (-32768)-1=0  |  6*7=42  17/5=3  1/0=32767",
+  "  X from C (containment)  Y from C (containment)   3+5=8  7-9=-2  (-32768)-1=0  |  6*7=42  17/5=3  1/0=-1",
+  "",
+  "=== Eco.Lab1Outer: any interface pointer gives any other interface (ok = obtained, the same pointer every time) ===",
+  "  from \\ to                  0    1    2    3    4    5",
+  "  0 IEcoUnknown              ok   ok   ok   ok   ok   ok",
+  "  1 IEcoLab1Outer            ok   ok   ok   ok   ok   ok",
+  "  2 IEcoCalculatorX          ok   ok   ok   ok   ok   ok",
+  "  3 IEcoCalculatorY          ok   ok   ok   ok   ok   ok",
+  "  4 IEcoPseudoRandomService1 ok   ok   ok   ok   ok   ok",
+  "  5 IEcoPseudoRandom1        ok   ok   ok   ok   ok   ok",
+  "",
+  "=== Eco.Lab1Outer: the generators of lab 1 are called through the pointer of calculator X (aggregated component B) ===",
+  "  3+5 through the same pointer = 8, then QueryInterface(IEcoPseudoRandom1) from it succeeded",
+  "  Fibonacci LFSR           first values: 000059C3 0000B387 0000670F 0000CE1E",
+  "  GaloisLFSR1              first values: 0000E270 00007138 0000389C 00001C4E",
+  "  Xorshift (Marsaglia)     first values: 00042021 04080601 9DCCA8C5 1255994F",
+  ""
+ ],
+ "demo_lab2": [
+  "=== Eco.Lab2: calculators X and Y requested with QueryInterface, every combination of the inner components ===",
+  "  X from A (containment)  Y from D (containment)   3+5=8  7-9=-2  (-32768)-1=-32768  |  6*7=42  17/5=3  1/0=0",
+  "  X from A (containment)  Y from E (aggregation)   3+5=8  7-9=-2  (-32768)-1=-32768  |  6*7=42  17/5=3  1/0=32767",
+  "  X from A (containment)  Y from C (containment)   3+5=8  7-9=-2  (-32768)-1=-32768  |  6*7=42  17/5=3  1/0=-1",
+  "  X from B (aggregation)  Y from D (containment)   3+5=8  7-9=-2  (-32768)-1=32767  |  6*7=42  17/5=3  1/0=0",
+  "  X from B (aggregation)  Y from E (aggregation)   3+5=8  7-9=-2  (-32768)-1=32767  |  6*7=42  17/5=3  1/0=32767",
+  "  X from B (aggregation)  Y from C (containment)   3+5=8  7-9=-2  (-32768)-1=32767  |  6*7=42  17/5=3  1/0=-1",
+  "  X from C (containment)  Y from D (containment)   3+5=8  7-9=-2  (-32768)-1=0  |  6*7=42  17/5=3  1/0=0",
+  "  X from C (containment)  Y from E (aggregation)   3+5=8  7-9=-2  (-32768)-1=0  |  6*7=42  17/5=3  1/0=32767",
+  "  X from C (containment)  Y from C (containment)   3+5=8  7-9=-2  (-32768)-1=0  |  6*7=42  17/5=3  1/0=-1",
+  "",
+  "=== Eco.Lab2: any interface pointer gives any other interface (ok = obtained, the same pointer every time) ===",
+  "  from \\ to                  0    1    2    3    4    5    6",
+  "  0 IEcoUnknown              ok   ok   ok   ok   ok   ok   ok",
+  "  1 IEcoLab2                 ok   ok   ok   ok   ok   ok   ok",
+  "  2 IEcoCalculatorX          ok   ok   ok   ok   ok   ok   ok",
+  "  3 IEcoCalculatorY          ok   ok   ok   ok   ok   ok   ok",
+  "  4 IEcoPseudoRandomService1 ok   ok   ok   ok   ok   ok   ok",
+  "  5 IEcoPseudoRandom1        ok   ok   ok   ok   ok   ok   ok",
+  "  6 IEcoLab1Outer            ok   ok   ok   ok   ok   ok   ok",
+  "",
+  "=== Eco.Lab2: the generators of lab 1 are called through the pointer of calculator X (aggregated component B) ===",
+  "  3+5 through the same pointer = 8, then QueryInterface(IEcoPseudoRandom1) from it succeeded",
+  "  Fibonacci LFSR           first values: 000059C3 0000B387 0000670F 0000CE1E",
+  "  GaloisLFSR1              first values: 0000E270 00007138 0000389C 00001C4E",
+  "  Xorshift (Marsaglia)     first values: 00042021 04080601 9DCCA8C5 1255994F",
+  ""
+ ]
+}
