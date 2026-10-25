@@ -147,11 +147,37 @@ Eco.Lab2                     IEcoLab2, IEcoCalculatorX, IEcoCalculatorY
 
 Допущения: в задании компоненты A–E не определены; принято A, B – `IEcoCalculatorX`, D, E – `IEcoCalculatorY`, C – оба интерфейса, B и E агрегируемые. Политики вне контракта (переполнение вычитания, деление на ноль) у компонентов разные и документированы, по ним видно, какой компонент ответил.
 
+### Как собрать и запустить вторую лабу
+
+Нужны macOS на arm64, Xcode и **Eco.Framework** (в репозиторий не входит). Готовые библиотеки лабораторной работы 1 (`Eco.FibonacciLFSR1`, `Eco.GaloisLFSR1`, `Eco.Xorshift1`, папки `BuildFiles/Mac/arm64/Static*`) лежат в репозитории, их пересобирать не нужно: лаба 2 использует их как есть.
+
+**Быстро – одним скриптом** (собирает всё в правильном порядке в Debug и Release и запускает все тесты):
+
+```bash
+export ECO_FRAMEWORK=$HOME/Dev/Eco.Framework   # путь к вашей копии Eco.Framework
+tools/build_lab2.sh
+```
+
+Ожидаемый итог: `BUILD SUCCEEDED` для 14 библиотек (7 проектов × Debug и Release), затем `PASS` у всех семи проектов и строка `all assignment 2 components built and passed their tests`. Ключ `--with-lab1` дополнительно пересобирает три библиотеки лабы 1 (бинарные `.a` в репозитории при этом изменятся).
+
+**Вручную.** Порядок важен: сначала калькуляторы A–E, затем `Eco.Lab1Outer`, затем `Eco.Lab2`, потому что юнит-тесты внешних компонентов линкуют библиотеки калькуляторов и генераторов лабы 1.
+
 ```bash
 export ECO_FRAMEWORK=$HOME/Dev/Eco.Framework
-Eco.PseudoRandom/tests/run_unittest.sh Eco.Lab2         # демонстрация клиента + все проверки
+
+# 1. библиотека одного компонента (так же для Eco.CalcA … Eco.CalcE, Eco.Lab1Outer, Eco.Lab2; конфигурации Debug и Release)
+cd Eco.CalcB/AssemblyFiles/Mac/Xcode_v123
+xcodebuild -project EcoCalcB.xcodeproj -scheme Static -configuration Debug build
+cd -
+
+# 2. юнит-тест компонента: собирает его библиотеку и тестовый клиент (EcoCalcBUnitTest.xcodeproj) и запускает клиент
+Eco.PseudoRandom/tests/run_unittest.sh Eco.CalcB
 Eco.PseudoRandom/tests/run_unittest.sh Eco.Lab1Outer
-Eco.PseudoRandom/tests/run_unittest.sh Eco.CalcB        # и так же для CalcA, CalcC, CalcD, CalcE
+Eco.PseudoRandom/tests/run_unittest.sh Eco.Lab2          # печатает демонстрацию клиента и результат проверок
 ```
+
+Вывод `run_unittest.sh Eco.Lab2` – это и есть демонстрация задания: три блока (таблица всех 9 вариантов калькуляторов с включением и агрегированием, таблица «из любого интерфейса в любой» из `QueryInterface` и вызов генераторов лабы 1 через указатель калькулятора) и итог `PASS: all 719 checks passed`.
+
+**Из Xcode.** Откройте `Eco.Lab2/AssemblyFiles/Mac/Xcode_v123/EcoLab2UnitTest.xcodeproj` (так же для остальных проектов), один раз задайте `ECO_FRAMEWORK` в Xcode → Settings → Locations → Custom Paths, выберите схему `Static` и запустите (⌘R); вывод появится в консоли Xcode. Библиотеки зависимостей должны быть уже собраны: они лежат в репозитории или собираются `tools/build_lab2.sh`.
 
 Результаты юнит-тестов: A – 18 проверок, B – 24, C – 28, D – 15, E – 21, `Eco.Lab1Outer` – 617, `Eco.Lab2` – 719. Тесты покрывают 9 вариантов калькуляторов, матрицу `QueryInterface` (из любого интерфейса любой другой, один `IEcoUnknown`), вызов генераторов лабы 1 через указатель калькулятора (включая агрегированный B), общий счётчик ссылок и агрегирование самих внешних компонентов; намеренные поломки агрегирования тестами ловятся. Отчёт: `Eco.PseudoRandom/report/Report_Lab2_Aggregation.docx` (пересборка: `report/collect_lab2.py`, затем `node build_report_lab2.js`). Исходники компонентов A–E и внешних компонентов генерируются скриптами из `tools/` (`gen_calc.py`, `gen_outer.py`) поверх проектов eco-wizard.
