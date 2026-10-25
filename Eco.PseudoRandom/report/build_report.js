@@ -184,15 +184,15 @@ c.push(B("Только типы Eco (`int16_t`, `uint32_t`, `uint64_t`, `char_t`
 c.push(B("Каждый метод начинается с проверки указателей на NULL; крайние случаи (нулевое состояние, недопустимая разрядность, вызов Next до Init) возвращают коды `ERR_ECO_*`."));
 c.push(B("Глобальные символы, видимые линковщику, содержат суффикс CID (например, `g_xIEcoPseudoRandom1VTbl_" + CID.gal.suffix + "`), остальное объявлено `static`: иначе при статической линковке нескольких компонентов в один бинарник одноимённые таблицы подменяют друг друга (см. раздел 8.3)."));
 c.push(P("**Структура проекта компонента** создаётся утилитой eco-wizard (тип COM): `SharedFiles` (интерфейсы и идентификаторы), `HeaderFiles` и `SourceFiles` (реализация и фабрика), `UnitTestFiles` (тесты), `AssemblyFiles/Mac/Xcode_v123` (проекты Xcode)."));
-c.push(P("**Сборка.** Из терминала для каждого компонента (Debug и Release), затем для клиента:"));
+c.push(P("**Сборка.** Команды выполняются из корня репозитория lab_1. Для каждого компонента (Debug и Release), затем для клиента:"));
 c.push(...code([
-  "export ECO_FRAMEWORK=$HOME/Dev/Eco.Framework",
-  "cd ~/Dev/Eco.GaloisLFSR1/AssemblyFiles/Mac/Xcode_v123",
-  "xcodebuild -project EcoGaloisLFSR1.xcodeproj -scheme Static -configuration Release build",
-  "cd ~/Dev/Eco.Lab1/AssemblyFiles/Mac/Xcode_v123",
-  "xcodebuild -project EcoLab1UnitTest.xcodeproj -scheme Static -configuration Release \\",
-  "           -derivedDataPath ../../../.dd_client build",
-  "~/Dev/Eco.Lab1/.dd_client/Build/Products/Release/Static",
+  "export ECO_FRAMEWORK=$HOME/Dev/Eco.Framework        # путь к вашей копии Eco.Framework",
+  "(cd Eco.GaloisLFSR1/AssemblyFiles/Mac/Xcode_v123 && \\",
+  "   xcodebuild -project EcoGaloisLFSR1.xcodeproj -scheme Static -configuration Release build)",
+  "(cd Eco.Lab1/AssemblyFiles/Mac/Xcode_v123 && \\",
+  "   xcodebuild -project EcoLab1UnitTest.xcodeproj -scheme Static -configuration Release \\",
+  "              -derivedDataPath ../../../.dd_client build)",
+  "./Eco.Lab1/.dd_client/Build/Products/Release/Static",
 ]));
 c.push(SPACER());
 c.push(P("В Xcode для сборки из среды необходимо задать пользовательский путь `ECO_FRAMEWORK` (Settings → Locations → Custom Paths)."));
@@ -308,16 +308,16 @@ c.push(B("Системный промт разработан итерацион�
 // Appendix A
 c.push(H1("Приложение А. Полный текст финального системного промта (версия P9)", true));
 c.push(...code(promptFull.filter((l, i) => !(i < 8 && /^(<!--|AGENT:|LANG:|MODEL:|TEMPERATURE:|-->)/.test(l))), 13));
-c.push(H1("Приложение Б. Состав поставки", true));
+c.push(H1("Приложение Б. Состав поставки (пути от корня репозитория lab_1)", true));
 c.push(table(["Что", "Где"], [
-  ["Компоненты (исходный код и сборка)", "~/Dev/Eco.FibonacciLFSR1, ~/Dev/Eco.GaloisLFSR1, ~/Dev/Eco.Xorshift1 (SourceFiles, HeaderFiles, SharedFiles, BuildFiles/Mac)"],
-  ["Клиент «Калькулятор» и демонстрация", "~/Dev/Eco.Lab1 (UnitTestFiles/SourceFiles/EcoLab1.c)"],
-  ["Общие интерфейсы и IDL", "~/Dev/Eco.PseudoRandom/SharedFiles"],
-  ["Эталонная модель и генератор векторов", "~/Dev/Eco.PseudoRandom/reference"],
-  ["Контрактные тесты, установка, оценка", "~/Dev/Eco.PseudoRandom/tests"],
-  ["Промты, задания, журнал экспериментов", "~/Dev/Eco.PseudoRandom/prompts"],
-  ["Сбор данных и построение отчёта", "~/Dev/Eco.PseudoRandom/report"],
-  ["Проекты прогонов финального промта P9 и архив версий на основе P8", "~/Dev/Eco.Experiments (P9/run1–run3, shipped_P8)"],
+  ["Компоненты (исходный код и сборка)", "Eco.FibonacciLFSR1, Eco.GaloisLFSR1, Eco.Xorshift1 (SourceFiles, HeaderFiles, SharedFiles, BuildFiles/Mac)"],
+  ["Клиент «Калькулятор» и демонстрация", "Eco.Lab1 (UnitTestFiles/SourceFiles/EcoLab1.c)"],
+  ["Общие интерфейсы и IDL", "Eco.PseudoRandom/SharedFiles"],
+  ["Эталонная модель и генератор векторов", "Eco.PseudoRandom/reference"],
+  ["Контрактные тесты, установка, оценка", "Eco.PseudoRandom/tests"],
+  ["Промты, задания, журнал экспериментов", "Eco.PseudoRandom/prompts"],
+  ["Сбор данных и построение отчёта", "Eco.PseudoRandom/report"],
+  ["Рабочие проекты прогонов промтов (P0–P9)", "не входят в репозиторий; итоги каждого прогона записаны в Eco.PseudoRandom/prompts/experiment_log.md"],
 ], [3600, 6038]));
 
 /* ---------- document ---------- */
